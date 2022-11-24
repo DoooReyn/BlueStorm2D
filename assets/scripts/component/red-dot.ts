@@ -1,6 +1,9 @@
+/**
+ * 红点组件
+ */
 import { CERedDotKeys, TRedDotKeys } from "../data/red-dot-data";
 import { Singleton } from "../manager/singleton";
-import { CERedDotStyle, TRedDotStyle } from "../types/red-dot";
+import { CERedDotStyle, TRedDotStyle } from "../types/red-dot-type";
 
 const { ccclass, property } = cc._decorator;
 
@@ -18,35 +21,31 @@ export class RedDotComponent extends cc.Component {
   @property(cc.Label)
   labNum: cc.Label = null;
 
-  onEnable() {
+  protected onEnable() {
     Singleton.event.on(this.redKey, this._onRedDotStatusChanged, this);
     this._onRedDotStatusChanged();
   }
 
-  onDisable() {
-    Singleton.event.targetOff(this);
+  protected onDisable() {
+    Singleton.event.off(this.redKey, this._onRedDotStatusChanged, this);
   }
 
-  get redKey() {
+  public get redKey() {
     return CERedDotKeys[this.red_key] as TRedDotKeys;
   }
 
-  get redStyle() {
+  public get redStyle() {
     return CERedDotStyle[this.red_style] as TRedDotStyle;
   }
 
   private _onRedDotStatusChanged() {
-    cc.log(
-      `> [红点] 状态变化: ${this.redKey}`,
-      Singleton.red.count(this.redKey)
-    );
     const method = this[`_refresh${this.redStyle}`].bind(this);
     method && method();
   }
 
   private _refreshPure() {
     this.labNum.node.active = false;
-    this.container.active = Singleton.red.enabled(this.redKey);
+    this.container.active = Singleton.red.isEnabled(this.redKey);
   }
 
   private _refreshWithNumber() {

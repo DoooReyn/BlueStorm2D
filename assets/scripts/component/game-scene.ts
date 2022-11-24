@@ -1,17 +1,10 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/life-cycle-callbacks.html
-
 import { RedDotDataForTest, RedDotStruct } from "./data/red-dot-data";
 import { Singleton } from "./manager/singleton";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class GameScene extends cc.Component {
   @property(cc.Node)
   NewNode: cc.Node = null;
 
@@ -24,7 +17,7 @@ export default class NewClass extends cc.Component {
   // LIFE-CYCLE CALLBACKS:
 
   onLoad() {
-    cc.log(this.node.getComponent(NewClass));
+    cc.log(this.node.getComponent(GameScene));
   }
 
   onEnable() {

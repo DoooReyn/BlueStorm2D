@@ -1,10 +1,10 @@
+/**
+ * 红点管理器
+ */
 import { TRedDotKeys } from "../data/red-dot-data";
-import { IRedDotData, IRedDotStruct } from "../types/red-dot";
+import { IRedDotData, IRedDotStruct } from "../types/red-dot-type";
 import { Singleton } from "./singleton";
 
-/**
- * 红点树节点
- */
 export class RedDotTreeNode {
   private _parent: RedDotTreeNode = null;
   private _children: RedDotTreeNode[] = null;
@@ -117,9 +117,6 @@ export class RedDotTreeNode {
   }
 }
 
-/**
- * 红点管理器
- */
 export class RedDotMgr {
   public root: RedDotTreeNode = null;
 

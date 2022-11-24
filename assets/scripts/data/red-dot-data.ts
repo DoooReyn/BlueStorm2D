@@ -1,4 +1,7 @@
-import { IRedDotStruct } from "../types/red-dot";
+/**
+ * 红点相关数据
+ */
+import { IRedDotStruct } from "../types/red-dot-type";
 
 /**
  * 红点KEYS定义
@@ -66,6 +69,9 @@ export const CERedDotKeys = cc.Enum({
   "Root.DailyTask": 30,
 });
 
+/**
+ * 红点测试数据
+ */
 export const RedDotDataForTest = {
   "Root.Mail.System": 11,
   "Root.Mail.Private": 12,

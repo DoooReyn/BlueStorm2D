@@ -1,11 +1,4 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/life-cycle-callbacks.html
-
-const { ccclass, property } = cc._decorator;
+const { ccclass } = cc._decorator;
 
 @ccclass
 export default class LifeCycle extends cc.Component {
@@ -31,11 +24,11 @@ export default class LifeCycle extends cc.Component {
     cc.log(`${this.node.name} onDestroy`);
   }
 
-  lateUpdate() {
-    cc.log(`${this.node.name} lateUpdate`);
-  }
-
   update() {
     cc.log(`${this.node.name} update`);
+  }
+
+  lateUpdate() {
+    cc.log(`${this.node.name} lateUpdate`);
   }
 }
