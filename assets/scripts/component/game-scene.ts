@@ -1,5 +1,5 @@
-import { RedDotDataForTest, RedDotStruct } from "./data/red-dot-data";
-import { Singleton } from "./manager/singleton";
+import { RedDotDataForTest, RedDotStruct } from "../data/red-dot-data";
+import { Singleton } from "../manager/singleton";
 
 const { ccclass, property } = cc._decorator;
 
@@ -7,6 +7,9 @@ const { ccclass, property } = cc._decorator;
 export default class GameScene extends cc.Component {
   @property(cc.Node)
   NewNode: cc.Node = null;
+
+  @property(cc.Label)
+  drawcall: cc.Label = null;
 
   @property
   text: string = "hello";
@@ -17,6 +20,8 @@ export default class GameScene extends cc.Component {
   // LIFE-CYCLE CALLBACKS:
 
   onLoad() {
+    cc.dynamicAtlasManager.maxFrameSize = 512;
+    cc.dynamicAtlasManager.enabled = true;
     cc.log(this.node.getComponent(GameScene));
   }
 
@@ -26,7 +31,6 @@ export default class GameScene extends cc.Component {
   }
 
   onBtnClicked(event: cc.Event.EventTouch, name: string) {
-    cc.log(event, name);
     switch (name) {
       case "Status":
         this.NewNode.active = !this.NewNode.active;
@@ -40,5 +44,9 @@ export default class GameScene extends cc.Component {
       default:
         break;
     }
+  }
+
+  update() {
+    this.drawcall.string = `DC: ${cc.renderer.drawCalls} (${cc.dynamicAtlasManager.atlasCount})`;
   }
 }
