@@ -1,5 +1,6 @@
 import { RedDotDataForTest, RedDotStruct } from "../data/red-dot-data";
 import { Singleton } from "../manager/singleton";
+import FlowView from "./flow-view";
 
 const { ccclass, property } = cc._decorator;
 
@@ -30,7 +31,8 @@ export default class GameScene extends cc.Component {
     Singleton.red.build(RedDotDataForTest, RedDotStruct);
   }
 
-  onBtnClicked(event: cc.Event.EventTouch, name: string) {
+  onBtnClicked(_event: cc.Event.EventTouch, name: string) {
+    let view = cc.find("Canvas/ScrollView").getComponent(FlowView);
     switch (name) {
       case "Status":
         this.NewNode.active = !this.NewNode.active;
@@ -40,6 +42,18 @@ export default class GameScene extends cc.Component {
         break;
       case "Decrease":
         Singleton.red.find("Root.Mail.System").decrease();
+        break;
+      case "FlowViewState":
+        view.node.active = !view.node.active;
+        break;
+      case "FlowView10":
+        view.append(10);
+        break;
+      case "FlowView100":
+        view.append(100);
+        break;
+      case "FlowView1000":
+        view.append(1000);
         break;
       default:
         break;
